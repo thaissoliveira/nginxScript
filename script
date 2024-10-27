@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Diretório onde os logs de status do serviço serão armazenados.
+# É criado caso ainda não exista.
+nginx_status="/var/log/service_status"
+mkdir -p "$nginx_status"
+
+# Arquivos de log separados para registrar status "ONLINE" e "OFFLINE".
+online_log="$nginx_status/nginxon.log"
+offline_log="$nginx_status/nginxoff.log"
+
+
+# Nome do serviço monitotado
+SERVICE_NAME="nginx"
+
+# Função para verificar o status do serviço
+check_service() {
+# Obtém o status atual do serviço usando systemctl e registra a data/hora
+    local status=$(systemctl is-active "$SERVICE_NAME") 
+    local datetime=$(date +"%Y-%m-%d %H:%M:%S")
+
+# Linha de depuração para registrar o status detectado a cada execução
+    echo "$datetime - Status detectado: $status" >> "$nginx_status/debug.log"
+
+#Criação da condicional de decisão de resposta, existem dois tipos de arquivos de saída, um para caso o serviço esteja online e outro para caso o serviço esteja offline
+#Caso online, a resposta é enviada para o log online; caso esteja offline, a resposta é enviada para o log offline, ambos ficam dentro do caminho definido em nginx_status
+    if [ "$status" = "active" ]; then
+        echo "$datetime - $SERVICE_NAME - ONLINE - Serviço está operando normalmente" >> "$online_log"
+    else
+        echo "$datetime - $SERVICE_NAME - OFFLINE - Serviço está fora do ar" >> "$offline_log"
+    fi
+}
+
+# Executa a função de verificação do serviço nginx
+check_service
