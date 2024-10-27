@@ -1,0 +1,2 @@
+# Acessando o arquivo crontab, defini que o arquivo valid_nginx fosse executado a cada cinco minutos
+*/5 * * * * /bin/valid_nginx
