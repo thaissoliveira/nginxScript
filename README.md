@@ -3,9 +3,37 @@ Trabalho de criação e automatização de um script em shell que faça a verifi
 
 # Instalação do WSL no Windows 
 
-```bash
-npm install
+1) Abra seu painel de controle e clique em "Programas"
+
+   ![image](https://github.com/user-attachments/assets/a000bf4d-9fdb-4460-8e77-76d01f3eaa77)
+
+2) Dentro da seção de programas, clique em "Ativar ou desativar recursos do Windows"
+
+   ![image](https://github.com/user-attachments/assets/f03b7367-7348-43a3-970c-86f82f40c267)
+
+3) Verifique se a opção "Subsistema do Windows para Linux" está ativada
+
+   ![image](https://github.com/user-attachments/assets/243a4141-adf7-4c3a-b0f8-89fe5b71297b)
+
+    Após isso, reinicie seu dispositivo.
+   
+4) Abra o Windows PowerShell e digite o seguinte comando para visualizar as versões Linux disponíveis para instalação:
+   
+ ```bash
+wsl -l --online
 ```
+
+5) Agora, para fazer a instalação, digite o seguinte comando:
+
+ ```bash
+wsl --install Ubuntu
+```
+Neste exemplo, seria instalado o Ubuntu, mas você pode substituir pelo nome da versão de sua preferência!
+
+![image](https://github.com/user-attachments/assets/1562f904-6b98-4118-afe5-cddce4feccdb)
+
+Pronto, o sistema Linux Ubuntu foi instalado.
+
 # Subir Servidor Web Nginx
 
 ## Pré-requistos:
